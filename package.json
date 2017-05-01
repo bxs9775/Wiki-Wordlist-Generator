@@ -1,0 +1,19 @@
+{
+  "name": "wiki-wordlist-generator",
+  "version": "1.0.0",
+  "description": "A Node.js server designed to create a plain-text wordlist when given a URL to a supported wiki.",
+  "main": "./src/server.js",
+  "scripts": {
+    "test": "echo \"Test Complete\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bxs9775/Wiki-Wordlist-Generator.git"
+  },
+  "author": "Brian Sandon",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/bxs9775/Wiki-Wordlist-Generator/issues"
+  },
+  "homepage": "https://github.com/bxs9775/Wiki-Wordlist-Generator#readme"
+}
