@@ -4,6 +4,7 @@
   "description": "A Node.js server designed to create a plain-text wordlist when given a URL to a supported wiki.",
   "main": "./src/server.js",
   "scripts": {
+    "start": "node ./src/server.js",
     "test": "echo \"Test Complete\""
   },
   "repository": {
