@@ -36,6 +36,10 @@ var onRequest = function(request,response){
   console.dir(url);
   
   switch(url){
+    case "/getList":
+      console.dir("Code running");
+      writeMessage(response,200,"Action call successful.","text/plain");
+      break;
     case "/styles/main-page.css":
       writeMessage(response,200,indexCss,"text/css");
       break;
