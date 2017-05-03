@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Wiki Wordlist Generator</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1.0" />
+    
+    <link href="styles/main-page.css" rel="stylesheet" type="text/css" />
+    <script href="scripts/main-page.js" type="text/javascript"></script>
+  </head>
+  <body>
+    <section id="controls">
+      <h2>Controls:</h2>
+      <form id="dataRequestForm">
+        <label>URL:<input id="url" type="text"></label>
+        <label>
+          API:
+          <select id="api">
+            <option value="MediaWiki">MediaWiki</option>
+            <option value="Wikia">Wikia</option>
+          </select>
+        </label>
+        <label>Button: <button id="run">Run</button></label>
+      </form>
+    </section>
+    <section id="results">
+      <h2>Results:</h2>
+      <div id="textDiv"></div>
+    </section>
+  </body>
+</html>

@@ -6,6 +6,8 @@
 //Gets Node.js http module
 var http = require("http");
 
+var fs = require("fs");
+
 //Stores the port number we are going to be listening to
 var port = process.env.port || 3000;
 
