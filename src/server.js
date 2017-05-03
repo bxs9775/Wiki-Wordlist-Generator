@@ -14,7 +14,10 @@ var queryString = require('querystring');
 var index = fs.readFileSync(__dirname + "/../client/index.html");
 var indexCss = fs.readFileSync(__dirname + "/../client/styles/main-page.css");
 var indexScript = fs.readFileSync(__dirname + "/../client/scripts/main-page.js");
-var jsGlobals = fs.readFileSync(__dirname + "/../client/scripts/globals.js");
+
+//Other scripts
+var jsGlobals = require("./globals.js");
+var textGlobals = fs.readFileSync(__dirname + "/globals.js");
 
 //Stores the port number we are going to be listening to
 var port = process.env.port || 3000;
@@ -42,18 +45,26 @@ var onRequest = function(request,response){
         var contentType = "text/plain";
         
         var api = params.api;
+        var url = params.url;
         
         if(!api){
           writeMessage(response,400,"Bad Request Error - Missing an api.",contentType);
-          return;
+          return false;
         }
-        writeMessage(response,200,"No errors.",contentType);
+        if(jsGlobals.SITES[api] == undefined){
+          writeMessage(response,400,"Bad Request Error - Invalid api, api options are MediaWiki and Wikia",contentType);
+          return false;
+        }
+        var fullURL = "https://" + (url || jsGlobals.SITES[api]);
+        
+        
+        writeMessage(response,200,"api = " + api + ", url = " + fullURL,contentType);
         break;
       case "/styles/main-page.css":
         writeMessage(response,200,indexCss,"text/css");
         break;
       case "/scripts/globals.js":
-        writeMessage(response,200,jsGlobals,"text/javascript");
+        writeMessage(response,200,textGlobals,"text/javascript");
         break;
       case "/scripts/main-page.js":
         writeMessage(response,200,indexScript,"text/javascript");

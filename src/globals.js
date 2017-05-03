@@ -5,7 +5,11 @@
 **/
 "use strict";
 
+//Gives a default url for each API site
 var SITES = Object.freeze({
   "MediaWiki": "www.mediawiki.org",
   "Wikia": "www.wikia.com"
 });
+
+//Exporting
+module.exports.SITES = SITES;
