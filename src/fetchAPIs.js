@@ -14,6 +14,28 @@ var Client = require("node-rest-client");
 var bot = new MediaWiki.Bot();
 var client = new Client.Client();
 
+////////////////////////////////////////Helper functions/////////////////////////////////////////////
+//Creates a paintext list using the title values in the JSON.
+var returnListFromJSON = function(response,json){
+  //console.dir(json);
+  var rawList = [];
+  var length = json.length;
+  for(var i = 0; i < length;i++){
+    var title = json[i].title;
+    if(rawList.indexOf(title) < 0){
+      rawList.push(title);
+    }
+  }
+  //console.dir(rawList);
+  length = rawList.length;
+  var text = "";
+  for(var i = 0; i < length;i++){
+    text += rawList[i] + "\n";
+  }
+  console.log(text);
+  jsGlobals.write(response,200,text,"text\plain");
+}
+
 //Fetches a list of words from a wiki using the MediaWiki API
 var fetchMediaWikiList = function(response,url,limit){
   try{
@@ -21,7 +43,8 @@ var fetchMediaWikiList = function(response,url,limit){
     
     bot.get({ action: "query", list:"allpages", aplimit: limit, apfrom:"0"}).complete(function(list){
       console.log("Fetching from MediaWiki");
-      jsGlobals.write(response,200,JSON.stringify(list),"text\plain");
+      //jsGlobals.write(response,200,JSON.stringify(list),"text\plain");
+      returnListFromJSON(response,list.query.allpages);
     });
   }
   catch(e){
@@ -29,6 +52,7 @@ var fetchMediaWikiList = function(response,url,limit){
   }
 };
 
+////////////////////////////////API fetching functions//////////////////////////////////////////
 //Fetches a list of words from a wiki using the Wikia API
 var fetchWikiaList = function(response,url,limit){
   console.log("Fetching from Wikia");
@@ -43,7 +67,8 @@ var fetchWikiaList = function(response,url,limit){
     client.get(urlFULL,args,function(data,statusResponse){
       //console.log(data);
       
-      jsGlobals.write(response,200,JSON.stringify(data),"text\plain");
+      //jsGlobals.write(response,200,JSON.stringify(data),"text\plain");
+      returnListFromJSON(response,data.items);
     });
   }
   catch(e){
