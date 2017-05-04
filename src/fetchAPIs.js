@@ -15,7 +15,7 @@ var fetchMediaWikiList = function(response,url,limit){
   var bot = new MediaWiki.Bot();
   bot.settings.endpoint = url + "/w/api.php";
   
-  bot.get({ action: "query", list:"allpages", aplimit: limit}).complete(function(list){
+  bot.get({ action: "query", list:"allpages", aplimit: limit, apfrom:"0"}).complete(function(list){
     jsGlobals.write(response,200,JSON.stringify(list),"text\plain");
   });
 };
