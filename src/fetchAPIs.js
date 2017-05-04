@@ -19,21 +19,25 @@ var client = new Client.Client();
 var returnListFromJSON = function(response,json){
   //console.dir(json);
   var rawList = [];
-  var length = json.length;
-  for(var i = 0; i < length;i++){
-    var title = json[i].title;
-    if(rawList.indexOf(title) < 0){
-      rawList.push(title);
+  if(json){
+    var length = json.length;
+    for(var i = 0; i < length;i++){
+      var title = json[i].title;
+      if(rawList.indexOf(title) < 0){
+        rawList.push(title);
+      }
     }
+    //console.dir(rawList);
+    length = rawList.length;
+    var text = "";
+    for(var i = 0; i < length;i++){
+      text += rawList[i] + "\n";
+    }
+    console.log(text);
+    jsGlobals.write(response,200,text,"text\plain");
+  } else {
+    jsGlobals.write(response,200,"(No data found.)","Text\plain");
   }
-  //console.dir(rawList);
-  length = rawList.length;
-  var text = "";
-  for(var i = 0; i < length;i++){
-    text += rawList[i] + "\n";
-  }
-  console.log(text);
-  jsGlobals.write(response,200,text,"text\plain");
 }
 
 //Fetches a list of words from a wiki using the MediaWiki API
