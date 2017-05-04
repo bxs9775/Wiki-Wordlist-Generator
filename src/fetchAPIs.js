@@ -85,7 +85,10 @@ var fetchWikiaList = function(resp,url,limit){
       //console.dir(e);
       //console.dir(e.code);
       //console.dir(e.Error);
-      jsGlobals.write(resp,400,"Unknown Error - An unknown error occured with the Wikia API","text/plain");
+      var responseMessage = {
+        error: "Unknown Error - An unknown error occured with the Wikia API"
+      }
+      jsGlobals.write(resp,400,JSON.stringify(responseMessage),"text/json");
       return false;
     });
   }
