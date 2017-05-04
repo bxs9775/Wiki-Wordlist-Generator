@@ -14,7 +14,7 @@ Params:
 ### Wikis that work/don't work with this code
 Note: this list is incomplete.
 |  Working Wikis    | Wikis that don't work |
-|-------------------|-----------------------|
+| ----------------- | --------------------- |
 | www.mediawiki.org | zelda.gamepedia.com   |
 | www.jedipedia.net | www.gamepedia.com     |
 | en.wikipedia.org  | www.wikia.com         |
