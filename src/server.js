@@ -58,6 +58,7 @@ var onRequest = function(request,response){
             fetchAPIs.fetchMediaWikiList(response,fullURL,limit);
             break;
           case "Wikia":
+            console.log("Wikia");
             fetchAPIs.fetchWikiaList(response,fullURL,limit);
             break;
         }

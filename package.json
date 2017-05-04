@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/bxs9775/Wiki-Wordlist-Generator#readme",
   "dependencies": {
-    "mediawiki": "0.0.14"
+    "mediawiki": "0.0.14",
+    "node-rest-client": "^3.1.0"
   }
 }
