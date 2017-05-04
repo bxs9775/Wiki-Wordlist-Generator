@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/bxs9775/Wiki-Wordlist-Generator/issues"
   },
-  "homepage": "https://github.com/bxs9775/Wiki-Wordlist-Generator#readme"
+  "homepage": "https://github.com/bxs9775/Wiki-Wordlist-Generator#readme",
+  "dependencies": {
+    "mediawiki": "0.0.14"
+  }
 }

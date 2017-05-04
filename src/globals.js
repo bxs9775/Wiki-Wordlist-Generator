@@ -11,5 +11,13 @@ var SITES = Object.freeze({
   "Wikia": "www.wikia.com"
 });
 
+//writes a request with the specified errorcode, message, and type
+var write = function(response,errCode,msg,type){
+  response.writeHead(errCode, {"Content-Type": type});
+  response.write(msg);
+  response.end();
+};
+
 //Exporting
 module.exports.SITES = SITES;
+module.exports.write = write;
