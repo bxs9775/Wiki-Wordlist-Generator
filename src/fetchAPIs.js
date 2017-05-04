@@ -41,29 +41,31 @@ var returnListFromJSON = function(response,json){
 }
 
 //Fetches a list of words from a wiki using the MediaWiki API
-var fetchMediaWikiList = function(response,url,limit){
+var fetchMediaWikiList = function(resp,url,limit){
   try{
     bot.settings.endpoint = url + "/w/api.php";
     
     var request = bot.get({ action: "query", list:"allpages", aplimit: limit, apfrom:"0"})
-    request.complete(function(resp){
+    request.complete(function(response){
       console.log("Fetching from MediaWiki");
       //jsGlobals.write(response,200,JSON.stringify(list),"text\plain");
-      returnListFromJSON(response,resp.query.allpages);
+      returnListFromJSON(resp,response.query.allpages);
     });
     request.error(function(e){
-      throw e;
+      console.dir(e);
+      jsGlobals.write(resp,500,e.name + " - " + e.message,"text/plain");
+      return false;
     });
   }
   catch(e){
-    jsGlobals.write(response,400,e.name + " - " + e.message,"text/plain");
+    jsGlobals.write(resp,500,e.name + " - " + e.message,"text/plain");
     //throw e;
   }
 };
 
 ////////////////////////////////API fetching functions//////////////////////////////////////////
 //Fetches a list of words from a wiki using the Wikia API
-var fetchWikiaList = function(response,url,limit){
+var fetchWikiaList = function(resp,url,limit){
   console.log("Fetching from Wikia");
   try{
     //Sets up the starting params
@@ -73,18 +75,22 @@ var fetchWikiaList = function(response,url,limit){
       limit: limit
     };
     
-    var request = client.get(urlFULL,args,function(data,statusResponse){
+    var request = client.get(urlFULL,args,function(data,response){
       //console.log(data);
       
       //jsGlobals.write(response,200,JSON.stringify(data),"text\plain");
-      returnListFromJSON(response,data.items);
+      returnListFromJSON(resp,data.items);
     });
     request.on("error",function(e){
-      throw e;
+      //console.dir(e);
+      //console.dir(e.code);
+      //console.dir(e.Error);
+      jsGlobals.write(resp,400,"Unknown Error - An unknown error occured with the Wikia API","text/plain");
+      return false;
     });
   }
   catch(e){
-    jsGlobals.write(response,400,e.name + " - " + e.message,"text/plain");
+    jsGlobals.write(resp,500,e.name + " - " + e.message,"text/plain");
   }
 };
 
