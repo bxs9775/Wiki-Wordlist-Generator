@@ -21,7 +21,7 @@ var textGlobals = fs.readFileSync(__dirname + "/globals.js");
 var fetchAPIs = require("./fetchAPIs.js");
 
 //Stores the port number we are going to be listening to
-var port = process.env.port || 3000;
+var port = process.env.PORT || process.env.NODE_PORT || 3000;
 
 
 
