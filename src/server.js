@@ -81,9 +81,9 @@ var onRequest = function(request,response){
   catch(err){
     if(url = "/getList"){
       console.dir(err);
-      jsGlobals.write(response,200,"Error - " + err.message,"text/plain");
+      jsGlobals.write(response,400,err.name + " - " + err.message,"text/plain");
     } else{
-      jsGlobals.write(response,200,JSON.stringify(err),"text/json");
+      jsGlobals.write(response,400,JSON.stringify(err),"text/json");
     }
   }
 };
