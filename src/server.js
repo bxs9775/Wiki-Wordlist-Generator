@@ -16,8 +16,8 @@ var indexCss = fs.readFileSync(__dirname + "/../client/styles/main-page.css");
 var indexScript = fs.readFileSync(__dirname + "/../client/scripts/main-page.js");
 
 //Other scripts
-var jsGlobals = require("./globals.js");
-var textGlobals = fs.readFileSync(__dirname + "/globals.js");
+var nodeGlobals = require("./globals.js");
+var jsGlobals = fs.readFileSync(__dirname + "/../client/scripts/globals.js");
 var fetchAPIs = require("./fetchAPIs.js");
 
 //Stores the port number we are going to be listening to
@@ -44,14 +44,14 @@ var onRequest = function(request,response){
         var limit = params.limit || 100;
         
         if(!api){
-          jsGlobals.write(response,400,"Bad Request Error - Missing an api.",contentType);
+          nodeGlobals.write(response,400,"Bad Request Error - Missing an api.",contentType);
           return false;
         }
-        if(jsGlobals.SITES[api] == undefined){
-          jsGlobals.write(response,400,"Bad Request Error - Invalid api, api options are MediaWiki and Wikia",contentType);
+        if(nodeGlobals.SITES[api] == undefined){
+          nodeGlobals.write(response,400,"Bad Request Error - Invalid api, api options are MediaWiki and Wikia",contentType);
           return false;
         }
-        var fullURL = (url || jsGlobals.SITES[api]);
+        var fullURL = (url || nodeGlobals.SITES[api]);
         
         switch(api){
           case "MediaWiki":
@@ -64,26 +64,26 @@ var onRequest = function(request,response){
         }
         break;
       case "/styles/main-page.css":
-        jsGlobals.write(response,200,indexCss,"text/css");
+        nodeGlobals.write(response,200,indexCss,"text/css");
         break;
       case "/scripts/globals.js":
-        jsGlobals.write(response,200,textGlobals,"text/javascript");
+        nodeGlobals.write(response,200,jsGlobals,"text/javascript");
         break;
       case "/scripts/main-page.js":
-        jsGlobals.write(response,200,indexScript,"text/javascript");
+        nodeGlobals.write(response,200,indexScript,"text/javascript");
         break;
       case "/":
       default:
-        jsGlobals.write(response,200,index,"text/html");
+        nodeGlobals.write(response,200,index,"text/html");
         break;
     }
   }
   catch(err){
     if(url = "/getList"){
       console.dir(err);
-      jsGlobals.write(response,400,err.name + " - " + err.message,"text/plain");
+      nodeGlobals.write(response,400,err.name + " - " + err.message,"text/plain");
     } else{
-      jsGlobals.write(response,400,JSON.stringify(err),"text/json");
+      nodeGlobals.write(response,400,JSON.stringify(err),"text/json");
     }
   }
 };

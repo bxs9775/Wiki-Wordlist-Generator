@@ -5,7 +5,7 @@
 **/
 "use strict";
 
-var jsGlobals = require("./globals.js");
+var nodeGlobals = require("./globals.js");
 
 /////////////////////Node dependencies//////////////////////////
 var nodemw = require("nodemw")
@@ -33,9 +33,9 @@ var returnListFromJSON = function(response,json){
       text += rawList[i] + "\n";
     }
     console.log(text);
-    jsGlobals.write(response,200,text,"text\plain");
+    nodeGlobals.write(response,200,text,"text\plain");
   } else {
-    jsGlobals.write(response,200,"(No data found.)","Text\plain");
+    nodeGlobals.write(response,200,"(No data found.)","Text\plain");
   }
 }
 
@@ -53,21 +53,22 @@ var fetchMediaWikiList = function(resp,url,limit){
     };
     var bot = new nodemw({
       server: url,
-      path:"\w"
+      path:"\w",
+      userAgent: "WikiWordlist/1.0"
     })
     var request = bot.api.call(params,function(err,info,next,data){
       console.dir(err);
       console.dir(info);
       if(err){
         var responseMessage = "Unknown Error - An unknown error occured with the Wikia API";
-        jsGlobals.write(resp,400,responseMessage,"text/plaintext");
+        nodeGlobals.write(resp,400,responseMessage,"text/plaintext");
         return false;
       }
       returnListFromJSON(resp,info.allpages);
     });
   }
   catch(e){
-    jsGlobals.write(resp,500,e.name + " - " + e.message,"text/plain");
+    nodeGlobals.write(resp,500,e.name + " - " + e.message,"text/plain");
   }
 };
 
@@ -84,9 +85,6 @@ var fetchWikiaList = function(resp,url,limit){
     };
     
     var request = client.get(urlFULL,args,function(data,response){
-      //console.log(data);
-      
-      //jsGlobals.write(response,200,JSON.stringify(data),"text\plain");
       returnListFromJSON(resp,data.items);
     });
     request.on("error",function(e){
@@ -94,12 +92,12 @@ var fetchWikiaList = function(resp,url,limit){
       //console.dir(e.code);
       //console.dir(e.Error);
       var responseMessage = "Unknown Error - An unknown error occured with the Wikia API";
-      jsGlobals.write(resp,400,responseMessage,"text/plaintext");
+      nodeGlobals.write(resp,400,responseMessage,"text/plaintext");
       return false;
     });
   }
   catch(e){
-    jsGlobals.write(resp,500,e.name + " - " + e.message,"text/plain");
+    nodeGlobals.write(resp,500,e.name + " - " + e.message,"text/plain");
   }
 };
 
