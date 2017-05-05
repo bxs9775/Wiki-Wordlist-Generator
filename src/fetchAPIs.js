@@ -80,7 +80,8 @@ var fetchWikiaList = function(resp,url,limit){
     //Sets up the starting params
     var urlFULL = "https://" + url + "/api/v1/Articles/List";
     var args = {
-      namespaces: {ns:0},
+      //namespaces: {ns:0},
+      namespaces: 0,
       limit: limit
     };
     

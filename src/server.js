@@ -41,7 +41,7 @@ var onRequest = function(request,response){
         
         var api = params.api;
         var url = params.url;
-        var limit = params.limit || 100;
+        var limit = Number.parseInt(params.limit) || 100;
         
         if(!api){
           nodeGlobals.write(response,400,"Bad Request Error - Missing an api.",contentType);
