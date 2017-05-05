@@ -5,11 +5,13 @@ The backend code for a Node.js server designed to create a plain-text wordlist w
 https://glacial-plains-65818.herokuapp.com/
 
 ({server url}/)
+
 For the html GUI controls.
 
 https://glacial-plains-65818.herokuapp.com/getList
 
 ({server url}/getList)
+
 Gets the list for the current URL. (Only returns the raw JSON so far).
 Params:
 * api [REQUIRED] - the api to be used to gather the data. Acceptable values are mediawiki and wikia, although wikia is not implemented yet.
