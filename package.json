@@ -1,6 +1,6 @@
 {
   "name": "wiki-wordlist-generator",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "A Node.js server designed to create a plain-text wordlist when given a URL to a supported wiki.",
   "main": "./src/server.js",
   "scripts": {

@@ -36,6 +36,7 @@ var onRequest = function(request,response){
   
   try{
     switch(url){
+      case "/List":
       case "/getList":
         var contentType = "text/plain";
         

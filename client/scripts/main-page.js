@@ -11,47 +11,25 @@
   var urlInput = undefined;
   var apiInput = undefined;
   
+  var downloadButton = undefined;
+  
   window.onload = init;
   
-  //Makes an ajax request to the current server.
- /* function requestList(e){
-    //Fetch the action and params from the HTML
-    var action = $("dataRequestForm").attr("action");
-    var url = encodeURIComponent(urlInput.value);
-    var api = apiInput.value;
-    
-    //URL data string
-    var data = "url="+url+"&api="+api;
-    
-    //Making the ajax request
-    $.ajax({
-      type: "get",
-      url: action,
-      data: data,
-      dataType: "text\plain",
-      success: function(result,status,xhr){
-        console.dir(result);
-        document.querySelector("#results").textContent = result;
-        
-      },
-      failure: function(error,status,xhr){
-        console.dir(error);
-        document.querySelector("#results").textContent = error;
-      }
-    });
-    
-    e.preventDefault();
-    
-    return false;
-  }*/
+  function updateURL(e){
+    downloadButton.href = "/List?url="+(urlInput.value)+"&api="+apiInput.value;
+  }
 
   //Initializes the index page.
   function init(){
     urlInput = document.querySelector("#url");
     apiInput = document.querySelector("#api");
+    downloadButton = document.querySelector("#download");
+    
+    urlInput.onchange = updateURL;
     
     apiInput.onchange = function(e){
       urlInput.placeholder = SITES[e.target.value];
+      updateURL(e);
     }
     
     $("#dataRequestForm").submit(function(e){
