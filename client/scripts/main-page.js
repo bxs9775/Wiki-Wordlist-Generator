@@ -70,21 +70,7 @@
         data: data,
         dataType: "text",
         success: function(result,status,xhr){
-          console.dir(result);
           $("#results").text(result);
-          /*
-          var list = response.split("\n");
-          var len = list.length;
-          
-          var resultSection = document.querySelector("#results");
-          resultSection.innerHTML = "";
-          
-          for(var i = 0; i < len; i++){
-            var p = document.createElement("p");
-            p.textContent = list[i];
-            resultSection.appendChild(p);
-          }
-          */
         },
         failure: function(error,status,xhr){
           console.dir(error);

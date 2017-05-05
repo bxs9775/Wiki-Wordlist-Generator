@@ -16,7 +16,6 @@ var client = new Client.Client();
 ////////////////////////////////////////Helper functions/////////////////////////////////////////////
 //Creates a paintext list using the title values in the JSON.
 var returnListFromJSON = function(response,json){
-  //console.dir(json);
   var rawList = [];
   if(json){
     var length = json.length;
@@ -26,13 +25,11 @@ var returnListFromJSON = function(response,json){
         rawList.push(title);
       }
     }
-    //console.dir(rawList);
     length = rawList.length;
     var text = "";
     for(var i = 0; i < length;i++){
       text += rawList[i] + "\n";
     }
-    console.log(text);
     nodeGlobals.write(response,200,text,"text\plain");
   } else {
     nodeGlobals.write(response,200,"(No data found.)","Text\plain");
@@ -41,7 +38,6 @@ var returnListFromJSON = function(response,json){
 
 //Fetches a list of words from a wiki using the MediaWiki API
 var fetchMediaWikiList = function(resp,url,limit){
-  console.log("Fetching from MediaWiki");
   try{
     //Sets up the starting params
     //var urlFULL = url + "/w/api.php";
@@ -57,8 +53,6 @@ var fetchMediaWikiList = function(resp,url,limit){
       userAgent: "WikiWordlist/1.0"
     })
     var request = bot.api.call(params,function(err,info,next,data){
-      console.dir(err);
-      console.dir(info);
       if(err){
         var responseMessage = "Unknown Error - An unknown error occured with the Wikia API";
         nodeGlobals.write(resp,400,responseMessage,"text/plaintext");
@@ -75,7 +69,6 @@ var fetchMediaWikiList = function(resp,url,limit){
 ////////////////////////////////API fetching functions//////////////////////////////////////////
 //Fetches a list of words from a wiki using the Wikia API
 var fetchWikiaList = function(resp,url,limit){
-  console.log("Fetching from Wikia");
   try{
     //Sets up the starting params
     var urlFULL = "https://" + url + "/api/v1/Articles/List";
@@ -89,9 +82,6 @@ var fetchWikiaList = function(resp,url,limit){
       returnListFromJSON(resp,data.items);
     });
     request.on("error",function(e){
-      //console.dir(e);
-      //console.dir(e.code);
-      //console.dir(e.Error);
       var responseMessage = "Unknown Error - An unknown error occured with the Wikia API";
       nodeGlobals.write(resp,400,responseMessage,"text/plaintext");
       return false;
