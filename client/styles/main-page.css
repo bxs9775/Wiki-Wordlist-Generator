@@ -7,3 +7,34 @@ section{
 #results{
   white-space: pre;
 }
+
+form{
+  display: inline-block;
+}
+/*Gives all the links on the default input submit styling.*/
+a{
+  text-decoration: none;
+  padding: 1px 6px;
+  
+  /*General button*/
+  align-items: flex-start;
+  text-align: center;
+  cursor: default;
+  color: buttontext;
+  background-color: buttonface;
+  box-sizing: border-box;
+  padding: 2px 6px 3px;
+  border-width: 2px;
+  border-style: outset;
+  border-color: buttonface;
+  border-image: initial;
+  
+  /*button, submit, and reset*/
+  -webkit-appearance: push-button;
+  user-select: none;
+  white-space: pre;
+  
+  /*input styling*/
+  margin: 0em 0em 0em 0em;
+  font: 13.3333px Arial;
+}
