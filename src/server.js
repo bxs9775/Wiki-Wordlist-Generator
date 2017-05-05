@@ -51,7 +51,7 @@ var onRequest = function(request,response){
           jsGlobals.write(response,400,"Bad Request Error - Invalid api, api options are MediaWiki and Wikia",contentType);
           return false;
         }
-        var fullURL = "https://" + (url || jsGlobals.SITES[api]);
+        var fullURL = (url || jsGlobals.SITES[api]);
         
         switch(api){
           case "MediaWiki":
