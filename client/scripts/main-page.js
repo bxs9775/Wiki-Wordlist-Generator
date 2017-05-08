@@ -14,6 +14,8 @@
   
   var downloadButton = undefined;
   
+  var ENTER_KEY = 13;
+  
   window.onload = init;
   
   //updates the URL for the download button
@@ -55,29 +57,9 @@
     var limit = localStorage.getItem("limit");
     setForm(url,api,limit);
   }
-
-  //Initializes the index page.
-  function init(){
-    urlInput = document.querySelector("#url");
-    apiInput = document.querySelector("#api");
-    limitInput = document.querySelector("#limit");
-    downloadButton = document.querySelector("#download");
-    
-    urlInput.onchange = updateURL;
-    
-    apiInput.onchange = function(e){
-      updateAPI(e.target);
-    }
-    
-    loadForm();
-    
-    document.querySelector("#save").onclick = saveForm;
-    document.querySelector("#load").onclick = loadForm;
-    document.querySelector("#clear").onclick = function(){
-      setForm("","MediaWiki",100);
-    };
-    
-    $("#dataRequestForm").submit(function(e){
+  
+  //requests a wordlist from the server
+  function ajaxRequest(){
       //Fetch the action and params from the HTML
       var action = $("#dataRequestForm").attr("action");
       var url = encodeURIComponent(urlInput.value);
@@ -102,10 +84,44 @@
         }
       });
       
+  }
+
+  //Initializes the index page.
+  function init(){
+    urlInput = document.querySelector("#url");
+    apiInput = document.querySelector("#api");
+    limitInput = document.querySelector("#limit");
+    downloadButton = document.querySelector("#download");
+    
+    urlInput.onchange = updateURL;
+    
+    apiInput.onchange = function(e){
+      updateAPI(e.target);
+    }
+    
+    loadForm();
+    
+    document.querySelector("#save").onclick = saveForm;
+    document.querySelector("#load").onclick = loadForm;
+    document.querySelector("#clear").onclick = function(){
+      setForm("","MediaWiki",100);
+    };
+    
+    $("#dataRequestForm").submit(function(e){
+      ajaxRequest();
+      
       //Prevents default behavior
       e.preventDefault();
       
       return false;
     });
+    
+    $("document").keydown(function(e){
+      if(e.keycode == ENTER_KEY){
+        ajaxRequest();
+      }
+    });
+    
+    
   }
 }());
