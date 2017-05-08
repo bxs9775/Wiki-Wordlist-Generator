@@ -31,7 +31,7 @@ a{
   text-decoration: none;
   padding: 1px 6px;
   
-  /*General button*/
+  /*General button defaults*/
   align-items: flex-start;
   text-align: center;
   cursor: default;
@@ -44,12 +44,19 @@ a{
   border-color: buttonface;
   border-image: initial;
   
-  /*button, submit, and reset*/
+  /*button, submit, and reset defaults*/
   -webkit-appearance: push-button;
   user-select: none;
   white-space: pre;
   
-  /*input styling*/
+  /*input defaults*/
   margin: 0em 0em 0em 0em;
   font: 13.3333px Arial;
 }
+/*
+#resultSection{
+  transition: height 0.2s ease-in-out;
+  height: 0px;
+  overflow: hidden;
+}
+*/
