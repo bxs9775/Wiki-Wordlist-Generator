@@ -81,32 +81,31 @@
   //requests a wordlist from the server
   function ajaxRequest(){
     hideResults();
-      //Fetch the action and params from the HTML
-      var action = $("#dataRequestForm").attr("action");
-      var url = encodeURIComponent(urlInput.value);
-      var limit = Number(limitInput.value) || 100;
-      var api = apiInput.value;
-      
-      //URL data string
-      var data = "url="+url+"&api="+api+"&limit="+limit;
-      
-      //Making the ajax request
-      $.ajax({
-        type: "get",
-        url: action,
-        data: data,
-        dataType: "text",
-        success: function(result,status,xhr){
-          showResults();
-          $("#results").text(result);
-        },
-        failure: function(error,status,xhr){
-          showResults();
-          console.dir(error);
-          $("#results").text(error);
-        }
-      });
-      
+    //Fetch the action and params from the HTML
+    var action = $("#dataRequestForm").attr("action");
+    var url = encodeURIComponent(urlInput.value);
+    var limit = Number(limitInput.value) || 100;
+    var api = apiInput.value;
+    
+    //URL data string
+    var data = "url="+url+"&api="+api+"&limit="+limit;
+    
+    //Making the ajax request
+    $.ajax({
+      type: "get",
+      url: action,
+      data: data,
+      dataType: "text",
+      success: function(result,status,xhr){
+        showResults();
+        $("#results").text(result);
+      },
+      failure: function(error,status,xhr){
+        showResults();
+        console.dir(error);
+        $("#results").text(error);
+      }
+    });
   }
   ////////////////////////////////////////MAIN METHOD/////////////////////////////////////////////////////////
   //Initializes the index page.
