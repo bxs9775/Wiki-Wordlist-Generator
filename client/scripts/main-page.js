@@ -12,8 +12,6 @@
   var apiInput = undefined;
   var limitInput = undefined;
   
-  var display = undefined;
-  
   var downloadButton = undefined;
   
   var ENTER_KEY = 13;
@@ -62,33 +60,30 @@
   
   //requests a wordlist from the server
   function ajaxRequest(){
-    display.style.height = "0px";
-    
-    //Fetch the action and params from the HTML
-    var action = $("#dataRequestForm").attr("action");
-    var url = encodeURIComponent(urlInput.value);
-    var limit = Number(limitInput.value) || 100;
-    var api = apiInput.value;
-    
-    //URL data string
-    var data = "url="+url+"&api="+api+"&limit="+limit;
-    
-    //Making the ajax request
-    $.ajax({
-      type: "get",
-      url: action,
-      data: data,
-      dataType: "text",
-      success: function(result,status,xhr){
-        display.style.height = "auto";
-        $("#results").text(result);
-      },
-      failure: function(error,status,xhr){
-        display.style.height = "auto";
-        console.dir(error);
-        $("#results").text(error);
-      }
-    });
+      //Fetch the action and params from the HTML
+      var action = $("#dataRequestForm").attr("action");
+      var url = encodeURIComponent(urlInput.value);
+      var limit = Number(limitInput.value) || 100;
+      var api = apiInput.value;
+      
+      //URL data string
+      var data = "url="+url+"&api="+api+"&limit="+limit;
+      
+      //Making the ajax request
+      $.ajax({
+        type: "get",
+        url: action,
+        data: data,
+        dataType: "text",
+        success: function(result,status,xhr){
+          $("#results").text(result);
+        },
+        failure: function(error,status,xhr){
+          console.dir(error);
+          $("#results").text(error);
+        }
+      });
+      
   }
 
   //Initializes the index page.
@@ -97,7 +92,6 @@
     apiInput = document.querySelector("#api");
     limitInput = document.querySelector("#limit");
     downloadButton = document.querySelector("#download");
-    resultsSection = document.querySelector("#resultsSection");
     
     urlInput.onchange = updateURL;
     
@@ -114,13 +108,10 @@
     };
     
     $("#dataRequestForm").submit(function(e){
-      console.log("request made");
+      ajaxRequest();
       
       //Prevents default behavior
       e.preventDefault();
-      
-      //Makes the request
-      ajaxRequest();
       
       return false;
     });
