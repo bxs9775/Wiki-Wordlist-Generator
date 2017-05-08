@@ -10,6 +10,7 @@
   
   var urlInput = undefined;
   var apiInput = undefined;
+  var limitInput = undefined;
   
   var downloadButton = undefined;
   
@@ -26,12 +27,15 @@
     updateURL();
   }
   
-  function setForm(url,api){
+  function setForm(url,api,limit){
     if(url != null){
       urlInput.value = url;
     }
     if(api){
       apiInput.value = api;
+    }
+    if(limit != null){
+      limitInput.value = limit;
     }
     
     updateAPI(apiInput);
@@ -41,19 +45,22 @@
   function saveForm(){
     localStorage.setItem("url",urlInput.value);
     localStorage.setItem("api",apiInput.value);
+    localStorage.setItem("limit",limitInput.value);
   }
   
   //Saves the url and api values from local storage
   function loadForm(){
     var url = localStorage.getItem("url");
     var api = localStorage.getItem("api");
-    setForm(url,api);
+    var limit = localStorage.getItem("limit");
+    setForm(url,api,limit);
   }
 
   //Initializes the index page.
   function init(){
     urlInput = document.querySelector("#url");
     apiInput = document.querySelector("#api");
+    limitInput = document.querySelector("#limit");
     downloadButton = document.querySelector("#download");
     
     urlInput.onchange = updateURL;
@@ -67,17 +74,18 @@
     document.querySelector("#save").onclick = saveForm;
     document.querySelector("#load").onclick = loadForm;
     document.querySelector("#clear").onclick = function(){
-      setForm("","MediaWiki");
+      setForm("","MediaWiki",100);
     };
     
     $("#dataRequestForm").submit(function(e){
       //Fetch the action and params from the HTML
       var action = $("#dataRequestForm").attr("action");
       var url = encodeURIComponent(urlInput.value);
+      var limit = Number(limitInput.value) || 100;
       var api = apiInput.value;
       
       //URL data string
-      var data = "url="+url+"&api="+api;
+      var data = "url="+url+"&api="+api+"&limit="+limit;
       
       //Making the ajax request
       $.ajax({
