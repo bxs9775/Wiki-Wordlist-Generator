@@ -10,7 +10,12 @@ section{
 }
 
 h2{
-  margin-top: 8px;
+  /*Chinzel font from Google Fonts - https://fonts.google.com/specimen/Cinzel*/
+  font-family: 'Cinzel', serif;
+  font-weight: bold;
+  color: #115;
+  
+  margin-top: 0px;
   margin-bottom: 8px;
 }
 
