@@ -42,6 +42,7 @@
     }
     
     updateAPI(apiInput);
+    hideResults();
   }
   
   //Saves the url and api values to local storage
@@ -49,6 +50,8 @@
     localStorage.setItem("url",urlInput.value);
     localStorage.setItem("api",apiInput.value);
     localStorage.setItem("limit",limitInput.value);
+    
+    hideResults();
   }
   
   //Saves the url and api values from local storage
@@ -121,6 +124,12 @@
     }
     
     loadForm();
+    
+    //Hides the results when any of the controls are in focus
+    
+    urlInput.onfocus = hideResults;
+    apiInput.onfocus = hideResults;
+    limitInput.onfocus = hideResults;
     
     document.querySelector("#save").onclick = saveForm;
     document.querySelector("#load").onclick = loadForm;
