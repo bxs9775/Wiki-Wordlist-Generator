@@ -126,7 +126,6 @@
     loadForm();
     
     //Hides the results when any of the controls are in focus
-    
     urlInput.onfocus = hideResults;
     apiInput.onfocus = hideResults;
     limitInput.onfocus = hideResults;
