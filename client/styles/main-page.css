@@ -53,3 +53,10 @@ a{
   margin: 0em 0em 0em 0em;
   font: 13.3333px Arial;
 }
+
+#display{
+  height: 0;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+}

@@ -11,13 +11,14 @@
   var urlInput = undefined;
   var apiInput = undefined;
   var limitInput = undefined;
+  var displayFeild = undefined;
   
   var downloadButton = undefined;
   
   var ENTER_KEY = 13;
   
   window.onload = init;
-  
+  /////////////////////////////////FORM AND FORM DATA////////////////////////////////////////////
   //updates the URL for the download button
   function updateURL(){
     downloadButton.href = "/List?url="+(urlInput.value)+"&api="+apiInput.value;
@@ -58,8 +59,25 @@
     setForm(url,api,limit);
   }
   
+  //////////////////////////////////////////DISPLAY FUNCTIONS//////////////////////////////////////////
+  //Hides the results section
+  function hideResults(){
+    displayFeild.style.height = "0";
+    displayFeild.style.border = "0";
+    displayFeild.style.padding = "0";
+  }
+  
+  //Shows the results section
+  function showResults(){
+    displayFeild.style.height = "auto";
+    displayFeild.style.border = "1px solid black";
+    displayFeild.style.padding = "8px";
+  }
+  
+  ////////////////////////////////////////AJAX///////////////////////////////////////////
   //requests a wordlist from the server
   function ajaxRequest(){
+    hideResults();
       //Fetch the action and params from the HTML
       var action = $("#dataRequestForm").attr("action");
       var url = encodeURIComponent(urlInput.value);
@@ -76,21 +94,24 @@
         data: data,
         dataType: "text",
         success: function(result,status,xhr){
+          showResults();
           $("#results").text(result);
         },
         failure: function(error,status,xhr){
+          showResults();
           console.dir(error);
           $("#results").text(error);
         }
       });
       
   }
-
+  ////////////////////////////////////////MAIN METHOD/////////////////////////////////////////////////////////
   //Initializes the index page.
   function init(){
     urlInput = document.querySelector("#url");
     apiInput = document.querySelector("#api");
     limitInput = document.querySelector("#limit");
+    displayFeild = document.querySelector("#display");
     downloadButton = document.querySelector("#download");
     
     urlInput.onchange = updateURL;
