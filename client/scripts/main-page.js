@@ -15,8 +15,39 @@
   
   window.onload = init;
   
-  function updateURL(e){
+  //updates the URL for the download button
+  function updateURL(){
     downloadButton.href = "/List?url="+(urlInput.value)+"&api="+apiInput.value;
+  }
+  
+  //updates the API and related fields.
+  function updateAPI(apiField){
+    urlInput.placeholder = SITES[apiField.value];
+    updateURL();
+  }
+  
+  function setForm(url,api){
+    if(url != null){
+      urlInput.value = url;
+    }
+    if(api){
+      apiInput.value = api;
+    }
+    
+    updateAPI(apiInput);
+  }
+  
+  //Saves the url and api values to local storage
+  function saveForm(){
+    localStorage.setItem("url",urlInput.value);
+    localStorage.setItem("api",apiInput.value);
+  }
+  
+  //Saves the url and api values from local storage
+  function loadForm(){
+    var url = localStorage.getItem("url");
+    var api = localStorage.getItem("api");
+    setForm(url,api);
   }
 
   //Initializes the index page.
@@ -28,9 +59,16 @@
     urlInput.onchange = updateURL;
     
     apiInput.onchange = function(e){
-      urlInput.placeholder = SITES[e.target.value];
-      updateURL(e);
+      updateAPI(e.target);
     }
+    
+    loadForm();
+    
+    document.querySelector("#save").onclick = saveForm;
+    document.querySelector("#load").onclick = loadForm;
+    document.querySelector("#clear").onclick = function(){
+      setForm("","MediaWiki");
+    };
     
     $("#dataRequestForm").submit(function(e){
       //Fetch the action and params from the HTML

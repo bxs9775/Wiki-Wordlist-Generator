@@ -15,18 +15,25 @@
   <body>
     <section id="controls">
       <h2>Controls:</h2>
-      <form id="dataRequestForm" action="/getList" method="get">
-        <label>URL:<input id="url" type="text" name="url" placeholder="www.mediawiki.org"></label>
-        <label>
-          API:
-          <select id="api" name="api">
-            <option value="MediaWiki" selected>MediaWiki</option>
-            <option value="Wikia">Wikia</option>
-          </select>
-        </label>
-        <input type="submit" value="Display">
-      </form>
-      <a id="download" href="/List?api=MediaWiki" download>Download</a>
+      <div>
+        <form id="dataRequestForm" action="/getList" method="get">
+          <label>URL:<input id="url" type="text" name="url" placeholder="www.mediawiki.org"></label>
+          <label>
+            API:
+            <select id="api" name="api">
+              <option value="MediaWiki" selected>MediaWiki</option>
+              <option value="Wikia">Wikia</option>
+            </select>
+          </label>
+          <input type="submit" value="Display">
+        </form>
+        <a id="download" href="/List?api=MediaWiki" download>Download</a>
+      </div>
+      <div>
+        <button id="save" type="button">Save</button>
+        <button id="load" type="button">Load</button>
+        <button id="clear" type="button">Clear</button>
+      </div>
     </section>
     <section>
       <h2>Results:</h2>
