@@ -24,7 +24,7 @@
   /////////////////////////////////FORM AND FORM DATA////////////////////////////////////////////
   //updates the URL for the download button
   function updateURL(){
-    downloadButton.href = "/List?url="+(urlInput.value)+"&api="+apiInput.value;
+    downloadButton.href = "/List?url="+(urlInput.value)+"&api="+apiInput.value+"&limit="+limitInput.value;
   }
   
   //updates the API and related fields.
