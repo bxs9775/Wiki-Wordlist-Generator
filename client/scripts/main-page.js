@@ -67,11 +67,13 @@
   //////////////////////////////////////////DISPLAY FUNCTIONS//////////////////////////////////////////
   //hides the padding and border on the results display
   function hideBorders(){
-    console.log("Hide borders.");
-    animDone = true;
+    //console.log("Hide borders.");
+    if(!animDone){
+      animDone = true;
     displayFeild.style.border = "0";
     displayFeild.style.padding = "0";
     displayFeild.removeEventListener(animDoneEvent,hideBorders, false);
+    }
   }
   
   //Hides the results section
@@ -90,6 +92,7 @@
   
   //Shows the results section
   function showResults(){
+    animDone = true;
     displayFeild.style.maxHeight = "100000px";
     displayFeild.style.border = "1px solid black";
     displayFeild.style.padding = "8px";
@@ -118,10 +121,10 @@
         showResults();
         $("#results").text(result);
       },
-      failure: function(error,status,xhr){
+      error: function(xhr,status,error){
+        //Display results
         showResults();
-        console.dir(error);
-        $("#results").text(error);
+        $("#results").text(xhr.responseText);
       }
     });
   }

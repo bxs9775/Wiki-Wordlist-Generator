@@ -54,7 +54,8 @@ var fetchMediaWikiList = function(resp,url,limit){
     })
     var request = bot.api.call(params,function(err,info,next,data){
       if(err){
-        var responseMessage = "Unknown Error - An unknown error occured with the Wikia API";
+        //console.dir(err);
+        var responseMessage = "Unknown Error - An unknown error occured with the MediaWiki API";
         nodeGlobals.write(resp,400,responseMessage,"text/plaintext");
         return false;
       }
