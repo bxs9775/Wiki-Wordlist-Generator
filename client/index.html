@@ -12,11 +12,11 @@
     <!--Chinzel font from Google Fonts - https://fonts.google.com/specimen/Cinzel-->
     <link href="https://fonts.googleapis.com/css?family=Cinzel" rel="stylesheet">
     
-    <!--Main stylesheet for the index-->
+    <!--main stylesheet for the index-->
     <link href="styles/main-page.css" rel="stylesheet" type="text/css" />
-    <!--A script containing globals for the project, however it is only used by one file-->
+    <!--a script containing globals for the project, however it is only used by one file-->
     <script src="scripts/globals.js" type="text/javascript"></script>
-    <!--Main script for the index-->
+    <!--main script for the index-->
     <script src="scripts/main-page.js" type="text/javascript"></script>
   </head>
   <body>
@@ -51,11 +51,14 @@
         <button id="save" type="button">Save</button>
         <!--loads the form data from localStorage-->
         <button id="load" type="button">Load</button>
+        <!--resets the form to the default values api=MediaWiki, url="", limit=100-->
         <button id="clear" type="button">Clear</button>
       </div>
     </section>
+    <!--display section only visible after the Display button is pressed or the user presses enter-->
     <section id="display">
       <h2>Results:</h2>
+      <!--displays the most recent results-->
       <div id="results"></div>
     </section>
   </body>

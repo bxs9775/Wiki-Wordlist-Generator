@@ -18,6 +18,6 @@ var write = function(response,errCode,msg,type){
   response.end();
 };
 
-//Exporting
+//exports the SITES field and write function so they can be used by other scripts
 module.exports.SITES = SITES;
 module.exports.write = write;

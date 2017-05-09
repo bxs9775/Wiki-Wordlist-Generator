@@ -5,24 +5,32 @@
 **/
 "use strict";
 
-
+//uses a IIFE for closure.
 (function(){
-  
+  ///////////////////////////////////////////FEILDS/////////////////////////////////////////////
+  //sets up fields for various HTML elements.
   var urlInput = undefined;
   var apiInput = undefined;
   var limitInput = undefined;
   var displayFeild = undefined;
   var waitMsg = undefined;
-  
   var downloadButton = undefined;
   
+  //constant value representing the keycode for the ENTER key.
   var ENTER_KEY = 13;
+  
+  //bool stating whether the most recent animation has finished
   var animDone = false;
+  //the name for the event called the end of a transition effect
+  //different browsers use different names
+  //defaults to the webkit name
   var animDoneEvent = "webkitTransitionEnd";
   
+  //runs init when everything is loaded.
   window.onload = init;
+  
   /////////////////////////////////FORM AND FORM DATA////////////////////////////////////////////
-  //updates the URL for the download button
+  //updates the URL for the download "button"
   function updateURL(){
     downloadButton.href = "/List?url="+(urlInput.value)+"&api="+apiInput.value+"&limit="+limitInput.value;
   }
@@ -33,6 +41,7 @@
     updateURL();
   }
   
+  //sets the url, api, and limit values for the form
   function setForm(url,api,limit){
     if(url != null){
       urlInput.value = url;
@@ -68,13 +77,14 @@
   //////////////////////////////////////////DISPLAY FUNCTIONS//////////////////////////////////////////
   //hides the padding and border on the results display
   function hideBorders(){
-    //console.log("Hide borders.");
+    //skips these step if the animationhas already been completed
     if(!animDone){
       animDone = true;
       displayFeild.style.border = "0";
       displayFeild.style.padding = "0";
     }
     
+    //removes the event listener so it is not accidently called later
     displayFeild.removeEventListener(animDoneEvent,hideBorders, false);
   }
   
@@ -82,8 +92,9 @@
   function hideResults(){
     animDone = false;
     displayFeild.style.maxHeight = "0";
-    //animation callback from Mark Rhodes answer in http://stackoverflow.com/questions/2087510/callback-on-css-transition
+    //animation callback procedure from Mark Rhodes answer in http://stackoverflow.com/questions/2087510/callback-on-css-transition
     displayFeild.addEventListener(animDoneEvent,hideBorders, false);
+    //sets up a timeout event in case the end of transition event is not called
     setTimeout(function(){
       if(!animDone){
         console.log("Animation timeout.");
@@ -120,11 +131,13 @@
       url: action,
       data: data,
       dataType: "text",
+      //runs when data has successfully been returned, displays the data
       success: function(result,status,xhr){
         waitMsg.style.display = "none";
         showResults();
         $("#results").text(result);
       },
+      //runs on an error response, displays the error message
       error: function(xhr,status,error){
         waitMsg.style.display = "none";
         showResults();
@@ -158,13 +171,12 @@
       animDoneEvent = "oTransitionEnd";
     }
     
-    
-    
-    //update forms events
+    //updates url and stored fields when the form elements change
     urlInput.onchange = updateURL;
     apiInput.onchange = function(e){
       updateAPI(e.target);
     }
+    limitInput.onchange = updateURL;
     
     //Loads local data
     loadForm();
@@ -174,13 +186,16 @@
     apiInput.onfocus = hideResults;
     limitInput.onfocus = hideResults;
     
+    //Sets up the save,load, and clear buttons
     document.querySelector("#save").onclick = saveForm;
     document.querySelector("#load").onclick = loadForm;
     document.querySelector("#clear").onclick = function(){
       setForm("","MediaWiki",100);
     };
     
+    //handles form submission
     $("#dataRequestForm").submit(function(e){
+      //performs the ajax request
       ajaxRequest();
       
       //Prevents default behavior
@@ -189,6 +204,7 @@
       return false;
     });
     
+    //performs the AJAX request when the ENTER key is pressed (and a form field is in focus)
     $("document").keydown(function(e){
       if(e.keycode == ENTER_KEY){
         ajaxRequest();

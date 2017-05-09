@@ -3,11 +3,14 @@
  * (C) 2017 by Brian Sandon (bxs9775@rit.edu)
  * Released under GPL-3.0
 **/
+
+/*Provides a blue background to contrast with the white sections.*/
 body{
   background-color: lightsteelblue;
   font-size: 1em.
 }
 
+/*Gives basic styling to the sections*/
 section{
   background-color: white;
   border: 1px solid black;
@@ -15,6 +18,7 @@ section{
   padding: 8px;
 }
 
+/*Sets the header styling*/
 h2{
   /*Chinzel font from Google Fonts - https://fonts.google.com/specimen/Cinzel*/
   font-family: 'Cinzel', serif;
@@ -25,19 +29,25 @@ h2{
   margin-bottom: 8px;
 }
 
+/*Preserves the line breaks in the results text so that the text looks like a list.*/
 #results{
   white-space: pre;
 }
 
+/*Puts the form in-line with the Download "button"*/
 form{
   display: inline-block;
 }
-/*Gives all the links on the default input submit styling.*/
+/*
+Gives all the links on the default input submit styling.
+This makes the download "button" look like a real button.
+[Results vary depending on browser]
+*/
 a{
   text-decoration: none;
   padding: 1px 6px;
   
-  /*General button*/
+  /*general button*/
   align-items: flex-start;
   text-align: center;
   cursor: default;
@@ -60,8 +70,8 @@ a{
   font: 13.3333px Arial;
 }
 
+/*Hides the display section by setting the max-height to 0 and animates the height transitions.*/
 #display{
-  
   -webkit-transition: max-height 2s;
   transition: max-height 2s;
   
@@ -72,6 +82,7 @@ a{
   overflow: hidden;
 }
 
+/*Hides the wait message until it is time to display it*/
 #waitMsg{
   display: none;
   color: darkblue;
