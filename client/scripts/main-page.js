@@ -70,10 +70,11 @@
     //console.log("Hide borders.");
     if(!animDone){
       animDone = true;
-    displayFeild.style.border = "0";
-    displayFeild.style.padding = "0";
-    displayFeild.removeEventListener(animDoneEvent,hideBorders, false);
+      displayFeild.style.border = "0";
+      displayFeild.style.padding = "0";
     }
+    
+    displayFeild.removeEventListener(animDoneEvent,hideBorders, false);
   }
   
   //Hides the results section
