@@ -56,11 +56,11 @@ a{
 
 #display{
   
-  -webkit-transition: height 10s;
-  transition: height 10s;
+  -webkit-transition: max-height 2s;
+  transition: max-height 2s;
   
   
-  height: 0;
+  max-height: 0;
   padding: 0;
   border: 0;
   overflow: hidden;

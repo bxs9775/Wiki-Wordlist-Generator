@@ -16,6 +16,8 @@
   var downloadButton = undefined;
   
   var ENTER_KEY = 13;
+  var animDone = false;
+  var animDoneEvent = "webkitTransitionEnd";
   
   window.onload = init;
   /////////////////////////////////FORM AND FORM DATA////////////////////////////////////////////
@@ -63,16 +65,32 @@
   }
   
   //////////////////////////////////////////DISPLAY FUNCTIONS//////////////////////////////////////////
-  //Hides the results section
-  function hideResults(){
-    displayFeild.style.height = "0";
+  //hides the padding and border on the results display
+  function hideBorders(){
+    console.log("Hide borders.");
+    animDone = true;
     displayFeild.style.border = "0";
     displayFeild.style.padding = "0";
+    displayFeild.removeEventListener(animDoneEvent,hideBorders, false);
+  }
+  
+  //Hides the results section
+  function hideResults(){
+    animDone = false;
+    displayFeild.style.maxHeight = "0";
+    //animation callback from Mark Rhodes answer in http://stackoverflow.com/questions/2087510/callback-on-css-transition
+    displayFeild.addEventListener(animDoneEvent,hideBorders, false);
+    setTimeout(function(){
+      if(!animDone){
+        console.log("Animation timeout.");
+        hideBorders();
+      }
+    },4000);
   }
   
   //Shows the results section
   function showResults(){
-    displayFeild.style.height = "auto";
+    displayFeild.style.maxHeight = "100000px";
     displayFeild.style.border = "1px solid black";
     displayFeild.style.padding = "8px";
   }
@@ -110,18 +128,37 @@
   ////////////////////////////////////////MAIN METHOD/////////////////////////////////////////////////////////
   //Initializes the index page.
   function init(){
+    //html elements
     urlInput = document.querySelector("#url");
     apiInput = document.querySelector("#api");
     limitInput = document.querySelector("#limit");
     displayFeild = document.querySelector("#display");
     downloadButton = document.querySelector("#download");
     
-    urlInput.onchange = updateURL;
+    //sets the correct on transition end event
+    //browser checking code from pilau's answer in http://stackoverflow.com/questions/9847580/how-to-detect-safari-chrome-ie-firefox-and-opera-browser
+    ////Firefox
+    if(typeof InstallTrigger !== "undefined"){
+      animDoneEvent = "transitionend";
+    }
+    ////IE9+
+    if(false || !!document.documentMode){
+      animDoneEvent = "msTransitionEnd";
+    }
+    ////Opera
+    if(!!window.opera || navigator.userAgent.indexOf(" OPR/") >= 0){
+      animDoneEvent = "oTransitionEnd";
+    }
     
+    
+    
+    //update forms events
+    urlInput.onchange = updateURL;
     apiInput.onchange = function(e){
       updateAPI(e.target);
     }
     
+    //Loads local data
     loadForm();
     
     //Hides the results when any of the controls are in focus
