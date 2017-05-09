@@ -12,6 +12,7 @@
   var apiInput = undefined;
   var limitInput = undefined;
   var displayFeild = undefined;
+  var waitMsg = undefined;
   
   var downloadButton = undefined;
   
@@ -102,6 +103,7 @@
   ////////////////////////////////////////AJAX///////////////////////////////////////////
   //requests a wordlist from the server
   function ajaxRequest(){
+    waitMsg.style.display = "inline";
     hideResults();
     //Fetch the action and params from the HTML
     var action = $("#dataRequestForm").attr("action");
@@ -119,11 +121,12 @@
       data: data,
       dataType: "text",
       success: function(result,status,xhr){
+        waitMsg.style.display = "none";
         showResults();
         $("#results").text(result);
       },
       error: function(xhr,status,error){
-        //Display results
+        waitMsg.style.display = "none";
         showResults();
         $("#results").text(xhr.responseText);
       }
@@ -138,6 +141,7 @@
     limitInput = document.querySelector("#limit");
     displayFeild = document.querySelector("#display");
     downloadButton = document.querySelector("#download");
+    waitMsg = document.querySelector("#waitMsg");
     
     //sets the correct on transition end event
     //browser checking code from pilau's answer in http://stackoverflow.com/questions/9847580/how-to-detect-safari-chrome-ie-firefox-and-opera-browser
@@ -190,7 +194,6 @@
         ajaxRequest();
       }
     });
-    
     
   }
 }());

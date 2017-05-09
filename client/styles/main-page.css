@@ -1,5 +1,6 @@
 body{
   background-color: lightsteelblue;
+  font-size: 1em.
 }
 
 section{
@@ -64,4 +65,12 @@ a{
   padding: 0;
   border: 0;
   overflow: hidden;
+}
+
+#waitMsg{
+  display: none;
+  color: darkblue;
+  font-size: 1.2em;
+  font-weight: bold;
+  margin: 10px;
 }
