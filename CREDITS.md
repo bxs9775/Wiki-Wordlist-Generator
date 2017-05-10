@@ -8,7 +8,7 @@
 
 ### Node Libraries
 * http - standard Node.js library
-* fs - standard Node.js libary
+* fs - standard Node.js library
 * querystring by [gozala](https://www.npmjs.com/~gozala) - [https://www.npmjs.com/package/querystring](https://www.npmjs.com/package/querystring)
 * nodemw by [macbre](https://www.npmjs.com/~macbre) - [https://www.npmjs.com/package/nodemw](https://www.npmjs.com/package/nodemw)
 * node-rest-client by [acero](https://www.npmjs.com/~acero) - [https://www.npmjs.com/package/node-rest-client](https://www.npmjs.com/package/node-rest-client)
