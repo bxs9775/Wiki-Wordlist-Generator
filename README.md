@@ -1,22 +1,16 @@
 # Wiki-Wordlist-Generator
-The backend code for a Node.js server designed to create a plain-text wordlist when given a URL to a supported wiki. This code will later be hosted on a Hadoop server.
+The backend code for a Node.js server designed to create a plain-text wordlist when given a URL to a supported wiki. This project is not currently being hosted on a live server.
 
 ### URLs
-https://glacial-plains-65818.herokuapp.com/
-
-({server url}/)
+{server url}/
 
 For the html GUI controls.
 
-https://glacial-plains-65818.herokuapp.com/getList
-
-({server url}/getList)
+{server url}/getList
 
 [OR]
 
-https://glacial-plains-65818.herokuapp.com/List
-
-({server url}/List)
+{server url}/List
 
 Gets the list for the current URL.
 
